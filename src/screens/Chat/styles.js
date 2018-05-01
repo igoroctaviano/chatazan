@@ -26,12 +26,8 @@ export default StyleSheet.create({
     paddingRight: screenPadding
   },
   header: {
-    flex: 1,
-    alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    paddingLeft: screenPadding,
-    paddingRight: screenPadding
+    alignItems: 'center'
   },
   answerBaloon: {
     alignSelf: 'flex-start',

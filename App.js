@@ -1,7 +1,30 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React, { Component } from "react";
+import { StackNavigator } from "react-navigation";
 
-import Chat from "./src/screens/Chat/Chat";
+import ChatScreen from "./src/screens/Chat/ChatScreen";
+import HomeScreen from "./src/screens/Home/HomeScreen";
+import LoginScreen from "./src/screens/Login/LoginScreen";
+import SignUpScreen from "./src/screens/SignUp/SignUpScreen";
+
+const RootStack = StackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+    },
+    SignUp: {
+      screen: SignUpScreen
+    },
+    Login: {
+      screen: LoginScreen
+    },
+    Chat: {
+      screen: ChatScreen
+    }
+  },
+  {
+    initialRouteName: "Home"
+  }
+);
 
 /* const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -13,7 +36,5 @@ import Chat from "./src/screens/Chat/Chat";
 // type Props = {};
 // export default class App extends Component<Props> {
 export default function App(props) {
-  return (
-    <Chat />
-  );
+  return <RootStack />;
 }

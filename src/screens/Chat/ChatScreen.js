@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -7,33 +7,45 @@ import {
   Image,
   ScrollView,
   FlatList
-} from 'react-native';
+} from "react-native";
 
-import styles from './styles';
+import styles from "./styles";
 
-export default class Chat extends React.Component {
+export default class ChatScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      text: '',
+      text: "",
       messages: [
-        { key: '1', text: 'Hey dude!', isAnswer: false },
+        { key: "1", text: "Hey dude!", isAnswer: false },
         {
-          key: '2',
-          text: 'Hey! how are you?!',
+          key: "2",
+          text: "Hey! how are you?!",
           isAnswer: true
         },
-        { key: '3', text: 'Awesome!!!!', isAnswer: false },
-        { key: '4', text: 'Wooooooowwwww! thats amazing!!!!!!!', isAnswer: true }
+        { key: "3", text: "Awesome!!!!", isAnswer: false },
+        {
+          key: "4",
+          text: "Wooooooowwwww! thats amazing!!!!!!!",
+          isAnswer: true
+        }
       ]
     };
 
     this.onSendMessage = this.onSendMessage.bind(this);
-    this.onGoBack = this.onGoBack.bind(this);
   }
 
-  isEmpty = () => this.state.text.trim() !== '';
+  static navigationOptions = {
+    headerTitle: <Header onGoBack={this.onGoBack} />,
+    headerStyle: {
+      backgroundColor: "#6B5CBB",
+      height: 60
+    },
+    headerTintColor: "#fff"
+  };
+
+  isEmpty = () => this.state.text.trim() !== "";
 
   onSendMessage() {
     if (this.isEmpty()) {
@@ -44,19 +56,16 @@ export default class Chat extends React.Component {
           isAnswer: false
         });
         const newMessages = previousState.messages;
-        return { messages: newMessages, text: '' };
+        return { messages: newMessages, text: "" };
       });
     } else {
-      this.setState({ text: '' });
+      this.setState({ text: "" });
     }
   }
-
-  onGoBack() {}
 
   render() {
     return (
       <View style={styles.chat}>
-        <Header onGoBack={this.onGoBack} />
         <Timeline messages={this.state.messages} />
         <InputBar
           onChangeText={text => this.setState({ text })}
@@ -71,23 +80,20 @@ export default class Chat extends React.Component {
 function Header(props) {
   return (
     <View style={styles.header}>
-      <View style={{ paddingRight: 15 }}>
-        <Button color="white" title="<" onPress={props.onGoBack} />
-      </View>
       <Image
         style={{
           width: 40,
           height: 40,
           borderRadius: 20,
           marginRight: 10,
-          backgroundColor: 'white'
+          backgroundColor: "white"
         }}
       />
       <View>
-        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>
           Igor Octaviano
         </Text>
-        <Text style={{ color: 'white' }}>last seen on...</Text>
+        <Text style={{ color: "white" }}>last seen on...</Text>
       </View>
     </View>
   );
@@ -101,7 +107,7 @@ function Message(props) {
         props.isAnswer ? styles.answerBaloon : styles.messageBaloon
       ]}
     >
-      <Text style={{ fontWeight: 'bold', color: '#6B5CBB' }}>
+      <Text style={{ fontWeight: "bold", color: "#6B5CBB" }}>
         Igor Octaviano
       </Text>
       <Text>{props.text}</Text>
@@ -134,7 +140,7 @@ function InputBar(props) {
         style={{
           flex: 1,
           padding: 10,
-          backgroundColor: 'white',
+          backgroundColor: "white",
           borderRadius: 15
         }}
         onChangeText={props.onChangeText}
