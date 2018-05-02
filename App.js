@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Platform, StatusBar } from "react-native";
 import { StackNavigator } from "react-navigation";
 
 import ChatScreen from "./src/screens/Chat/ChatScreen";
@@ -36,5 +37,5 @@ const RootStack = StackNavigator(
 // type Props = {};
 // export default class App extends Component<Props> {
 export default function App(props) {
-  return <RootStack />;
+  return <RootStack style={{ paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight }} />;
 }

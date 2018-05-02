@@ -115,20 +115,36 @@ function Message(props) {
   );
 }
 
-function Timeline(props) {
+function AutoScrollDownFlatList(props) {
+  const scrollDown = () => {
+    if (this.flatList) {
+      this.flatList.scrollToEnd({ animated: true });
+    }
+  };
+
   return (
     <FlatList
+      style={props.style}
+      data={props.data}
+      renderItem={props.renderItem}
+      /* Keyboard popping up triggers a layout, so it fix messages behind keyboard.
+       New chat messages arriving trigger content changes,
+       so it also scrolls to the bottom, so you can see the messages. */
+      ref={ref => (this.flatList = ref)}
+      onContentSizeChange={this.scrollDown}
+      onLayout={this.scrollDown}
+    />
+  );
+}
+
+function Timeline(props) {
+  return (
+    <AutoScrollDownFlatList
       style={styles.timeline}
       data={props.messages}
       renderItem={({ item }) => (
         <Message text={item.text} isAnswer={item.isAnswer} />
       )}
-      /* Keyboard popping up triggers a layout, so it fix messages behind keyboard.
-         New chat messages arriving trigger content changes,
-         so it also scrolls to the bottom, so you can see the messages. */
-      ref={ref => (this.flatList = ref)}
-      onContentSizeChange={() => this.flatList.scrollToEnd({ animated: true })}
-      onLayout={() => this.flatList.scrollToEnd({ animated: true })}
     />
   );
 }

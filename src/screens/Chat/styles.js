@@ -1,11 +1,10 @@
-import { StyleSheet, Platform, StatusBar } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const screenPadding = 10;
 
 export default StyleSheet.create({
   chat: {
     flex: 1,
-    paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
     backgroundColor: '#6B5CBB'
   },
   message: {

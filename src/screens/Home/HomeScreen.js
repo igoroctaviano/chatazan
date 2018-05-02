@@ -6,7 +6,6 @@ import {
   Image,
   TouchableHighlight,
   FlatList,
-  Platform,
   TextInput
 } from "react-native";
 
@@ -71,7 +70,7 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{ backgroundColor: '#6B5CBB' }}>
         {this.state.isOnSearch ? (
           <SearchBar
             onGoBack={this.toggleSearchBar}
@@ -107,16 +106,13 @@ function SearchBar(props) {
         flexDirection: "row",
         height: 80,
         paddingLeft: 15,
-        alignItems: "center",
-        backgroundColor: "#6B5CBB",
-        paddingTop: Platform.OS === "ios" ? 20 : StatusBar.currentHeight
+        alignItems: "center"
       }}
     >
       <Button title="<" color="white" onPress={props.onGoBack} />
       <TextInput
         style={{
           paddingLeft: 15,
-          backgroundColor: "#6B5CBB",
           color: "white",
           fontSize: 18
         }}
@@ -134,9 +130,7 @@ function Header(props) {
     <View
       style={{
         height: 80,
-        backgroundColor: "#6B5CBB",
         justifyContent: "space-around",
-        paddingTop: Platform.OS === "ios" ? 20 : StatusBar.currentHeight,
         alignItems: "center",
         flexDirection: "row"
       }}
